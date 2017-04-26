@@ -1,1 +1,1 @@
-# THREE.FontSizeAdjustingTextSprites
+# THREE.TextTextureMappingGroup
