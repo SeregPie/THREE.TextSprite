@@ -1,13 +1,9 @@
 (function(THREE) {
 
-	THREE.FontSizeAdjustingTextSprites = class extends THREE.CameraAssociatedObject {
-		constructor() {
-			super();
-		}
-	};
+	THREE.TextTextureMappingGroup = class extends THREE.CameraAssociatedGroup {};
 
-	Object.assign(THREE.FontSizeAdjustingTextSprites.prototype, {
-		isFontSizeAdjustingTextSprites: true,
+	Object.assign(THREE.TextTextureMappingGroup.prototype, {
+		isTextTextureMappingGroup: true,
 
 		update: (function() {
 			let _calcDistance = (function() {
