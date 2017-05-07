@@ -10,10 +10,11 @@ Try out the [demo](https://seregpie.github.io/THREE.TextTextureMappingGroup/)!
 
 - [THREE](https://github.com/mrdoob/three.js)
 - [THREE.CameraAssociatedGroup](https://github.com/SeregPie/THREE.CameraAssociatedGroup)
+- [THREE.TextTexture](https://github.com/SeregPie/THREE.TextTexture)
 
 ## members
 
-`.constructor(camera)`
+`.constructor({camera})`
 
 ---
 
