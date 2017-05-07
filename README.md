@@ -4,7 +4,7 @@
 
 ...
 
-Try out the [demo](https://seregpie.github.io/PaperDuck/)!
+Try out the [demo](https://seregpie.github.io/THREE.TextTextureMappingGroup/)!
 
 ## dependencies
 
