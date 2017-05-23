@@ -1,54 +1,66 @@
 (function(THREE) {
 
-	THREE.TextTextureMappingGroup = class extends THREE.CameraAssociatedGroup {};
+	let onBeforeRender = function(renderer, a, camera) {
+		this.updateScale();
+		let now = Date.now();
+		if (now > this.lastRedraw + this.redrawDelay) {
+			let redraw = this.redraw.bind(this, renderer, camera);
+			if (this.redrawDelay) {
+				setTimeout(redraw);
+			} else {
+				redraw();
+			}
+			this.lastRedraw = now;
+		}
+	};
 
-	Object.assign(THREE.TextTextureMappingGroup.prototype, {
-		isTextTextureMappingGroup: true,
+	THREE.TextSprite = class extends THREE.Sprite {
+		constructor({
+			textSize = 1,
+			redrawDelay = 1,
+			roundFontSizeToNearestPowerOfTwo = true,
+			maxFontSize = Infinity,
+			material = {},
+			texture = {},
+		} = {}) {
+			super(new THREE.SpriteMaterial(Object.assign({}, material, {map: new THREE.TextTexture(texture)})));
+			this.textSize = textSize;
+			this.redrawDelay = redrawDelay;
+			this.roundFontSizeToNearestPowerOfTwo = roundFontSizeToNearestPowerOfTwo;
+			this.maxFontSize = maxFontSize;
+			this.lastRedraw = 0;
 
-		update: (function() {
-			let _calcDistance = (function() {
-				let v1 = new THREE.Vector3();
-				let v2 = new THREE.Vector3();
+			let mesh = new THREE.Mesh();
+			mesh.onBeforeRender = onBeforeRender.bind(this);
+			this.add(mesh);
+		}
 
-				return function(object1, object2) {
-					v1.setFromMatrixPosition(object1.matrixWorld);
-					v2.setFromMatrixPosition(object2.matrixWorld);
-					return v1.distanceTo(v2);
-				};
-			})();
-
-
-			let _calcFontSize = function(minDistance, maxDistance, minFontSize, maxFontSize) {
-				while (minFontSize < maxFontSize && minDistance < maxDistance) {
-					maxFontSize /= 2;
-					minDistance *= 2;
+		calculateOptimalFontSize(renderer, camera) {
+			if (renderer.domElement.width && renderer.domElement.height && !this.material.map.blank) {
+				let distance = this.getWorldPosition().distanceTo(camera.getWorldPosition());
+				if (distance) {
+					return Math.round(renderer.domElement.height * this.getWorldScale().y / this.material.map.lineHeight / distance);
 				}
-				return maxFontSize;
-			};
+			}
+			return 0;
+		}
 
-			return function(camera) {
-				let children = this.children.filter(child => {
-					if (child && child.isSprite) {
-						if (child.material && child.material instanceof THREE.SpriteMaterial) {
-							if (child.material.map && child.material.map instanceof THREE.TextTexture) {
-								return true;
-							}
-						}
-					}
-					return false;
-				});
-				if (children.length) {
-					let distanceToCamera = _calcDistance(this, camera);
-					children.forEach(child => {
-						let fontSize = _calcFontSize(
-							Math.min(child.scale.x, child.scale.y) * 8,
-							distanceToCamera, 1, 256
-						);
-						child.material.map.fontSize = fontSize;
-					});
-				}
-			};
-		})(),
+		updateScale() {
+			this.scale.setX(this.material.map.aspect).setY(1).multiplyScalar(this.textSize);
+		}
+
+		redraw(renderer, camera) {
+			let fontSize = this.calculateOptimalFontSize(renderer, camera);
+			if (this.roundFontSizeToNearestPowerOfTwo) {
+				fontSize = THREE.Math.nearestPowerOfTwo(fontSize);
+			}
+			fontSize = Math.min(fontSize, this.maxFontSize);
+			this.material.map.fontSize = fontSize;
+		}
+	};
+
+	Object.assign(THREE.TextSprite.prototype, {
+		isTextSprite: true,
 	});
 
 }).call(this, THREE);
