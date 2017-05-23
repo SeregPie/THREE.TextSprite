@@ -1,25 +1,24 @@
-# THREE.TextTextureMappingGroup
+# THREE.TextSprite
 
-`class THREE.TextTextureMappingGroup extends THREE.CameraAssociatedGroup`
+`class THREE.TextSprite extends THREE.Sprite`
 
 ...
 
-Try out the [demo](https://seregpie.github.io/THREE.TextTextureMappingGroup/)!
+Try out the [demo](https://seregpie.github.io/THREE.TextSprite/)!
 
 ## dependencies
 
 - [THREE](https://github.com/mrdoob/three.js)
-- [THREE.CameraAssociatedGroup](https://github.com/SeregPie/THREE.CameraAssociatedGroup)
 - [THREE.TextTexture](https://github.com/SeregPie/THREE.TextTexture)
 
 ## members
 
-`.constructor({camera})`
+`.constructor({textSize, redrawDelay, roundFontSizeToNearestPowerOfTwo, maxFontSize, material, texture})`
 
 ---
 
-`.isTextTextureMappingGroup = true`
+`.isTextSprite = true`
 
-Used to check whether this is an instance of `TextTextureMappingGroup`.
+Used to check whether this is an instance of `TextSprite`.
 
 You should not change this, as it is used internally for optimisation.
