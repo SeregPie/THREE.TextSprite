@@ -19,3 +19,15 @@ body {
 	margin: 0;
 	padding: 0;
 }
+
+.github {
+	position: absolute;
+	z-index: 1;
+	left: 16px;
+	top: 16px;
+	opacity: .8;
+	color: White;
+	font-size: 24px;
+	font-family: Arial, Helvetica, sans-serif;
+	text-decoration: none;
+}
