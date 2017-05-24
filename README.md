@@ -15,6 +15,24 @@ Try out the [demo](https://seregpie.github.io/THREE.TextSprite/)!
 
 `.constructor({textSize, redrawDelay, roundFontSizeToNearestPowerOfTwo, maxFontSize, texture, material})`
 
+```javascript
+
+let sprite = new THREE.TextSprite({
+  textSize: 10,
+  redrawDelay: 250,
+  texture: {
+    text: 'Carpe Diem',
+    fontFamily: 'Arial, Helvetica, sans-serif',
+  },
+  material: {
+    color: 0xffbbff,
+    fog: true,
+  },
+});
+scene.add(sprite);
+
+```
+
 ---
 
 `.isTextSprite = true`
