@@ -15,6 +15,11 @@ Try out the [demo](https://seregpie.github.io/THREE.TextSprite/)!
 
 `.constructor({textSize, redrawDelay, roundFontSizeToNearestPowerOfTwo, maxFontSize, texture, material})`
 
+| argument | description |
+| ---: | :--- |
+| `texture` | Parameters to pass to the constructor of [TextTexture](https://github.com/SeregPie/THREE.TextTexture)). |
+| `material` | Parameters to pass to the constructor of [SpriteMaterial](https://threejs.org/docs/index.html#api/materials/SpriteMaterial). |
+
 ```javascript
 
 let sprite = new THREE.TextSprite({
@@ -45,7 +50,7 @@ You should not change this, as it is used internally for optimisation.
 
 `.textSize = 1`
 
-...
+The size of the text.
 
 ---
 
@@ -57,13 +62,13 @@ You should not change this, as it is used internally for optimisation.
 
 `.roundFontSizeToNearestPowerOfTwo = true`
 
-...
+If `true`, the calculated font size will be rounded to the nearest power of 2.
 
 ---
 
 `.maxFontSize = Infinity`
 
-...
+The maximum font size.
 
 ---
 
