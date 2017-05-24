@@ -13,18 +13,18 @@ Try out the [demo](https://seregpie.github.io/THREE.TextSprite/)!
 
 ## members
 
-`.constructor({textSize, redrawDelay, roundFontSizeToNearestPowerOfTwo, maxFontSize, texture, material})`
+`.constructor({textSize, redrawInterval, roundFontSizeToNearestPowerOfTwo, maxFontSize, texture, material})`
 
 | argument | description |
 | ---: | :--- |
-| `texture` | Parameters to pass to the constructor of [TextTexture](https://github.com/SeregPie/THREE.TextTexture)). |
+| `texture` | Parameters to pass to the constructor of [TextTexture](https://github.com/SeregPie/THREE.TextTexture). |
 | `material` | Parameters to pass to the constructor of [SpriteMaterial](https://threejs.org/docs/index.html#api/materials/SpriteMaterial). |
 
 ```javascript
 
 let sprite = new THREE.TextSprite({
   textSize: 10,
-  redrawDelay: 250,
+  redrawInterval: 250,
   texture: {
     text: 'Carpe Diem',
     fontFamily: 'Arial, Helvetica, sans-serif',
@@ -54,9 +54,9 @@ The size of the text.
 
 ---
 
-`.redrawDelay = 1`
+`.redrawInterval = 1`
 
-...
+The minimum time between two drawings. If 0, the canvas is redrawn immediately whenever `TextSprite` is rendered. Otherwise the process is deferred.
 
 ---
 
