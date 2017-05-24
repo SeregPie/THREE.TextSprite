@@ -13,7 +13,7 @@ Try out the [demo](https://seregpie.github.io/THREE.TextSprite/)!
 
 ## members
 
-`.constructor({textSize, redrawDelay, roundFontSizeToNearestPowerOfTwo, maxFontSize, material, texture})`
+`.constructor({textSize, redrawDelay, roundFontSizeToNearestPowerOfTwo, maxFontSize, texture, material})`
 
 ---
 
@@ -22,3 +22,33 @@ Try out the [demo](https://seregpie.github.io/THREE.TextSprite/)!
 Used to check whether this is an instance of `TextSprite`.
 
 You should not change this, as it is used internally for optimisation.
+
+---
+
+`.textSize = 1`
+
+...
+
+---
+
+`.redrawDelay = 1`
+
+...
+
+---
+
+`.roundFontSizeToNearestPowerOfTwo = true`
+
+...
+
+---
+
+`.maxFontSize = Infinity`
+
+...
+
+---
+
+`.dispose()`
+
+Disposes the texture and the material.
