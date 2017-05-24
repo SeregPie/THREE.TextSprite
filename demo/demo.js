@@ -69,12 +69,12 @@
 	let camera = new THREE.PerspectiveCamera(75, 1, n/128, 128*n);
 	camera.position.set(0, 0, 8*n);
 
-	let redrawDelay = 1;
+	let redrawInterval = 1;
 
 	let sprites = Array.from({length: 111}, () => {
 		let sprite = new THREE.TextSprite({
 			textSize: _randomTextSize(),
-			redrawDelay,
+			redrawInterval,
 			material: {
 				color: _randomColor(),
 			},
@@ -136,17 +136,17 @@
 	}, 'textSize');
 
 	gui.add({
-		get redrawDelay() {
-			return redrawDelay;
+		get redrawInterval() {
+			return redrawInterval;
 		},
 
-		set redrawDelay(value) {
-			redrawDelay = value;
+		set redrawInterval(value) {
+			redrawInterval = value;
 			sprites.forEach(sprite => {
-				sprite.redrawDelay = redrawDelay;
+				sprite.redrawInterval = redrawInterval;
 			});
 		},
-	}, 'redrawDelay', 0, 2000).step(1);
+	}, 'redrawInterval', 0, 2000).step(1);
 
 	gui.add({
 		fontFamily() {

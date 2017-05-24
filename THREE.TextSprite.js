@@ -2,9 +2,9 @@
 
 	let onBeforeRender = function(renderer, a, camera) {
 		let now = Date.now();
-		if (now > this.lastRedraw + this.redrawDelay) {
+		if (now > this.lastRedraw + this.redrawInterval) {
 			let redraw = this.redraw.bind(this, renderer, camera);
-			if (this.redrawDelay) {
+			if (this.redrawInterval) {
 				setTimeout(redraw);
 			} else {
 				redraw();
@@ -18,7 +18,7 @@
 	THREE.TextSprite = class extends THREE.Sprite {
 		constructor({
 			textSize = 1,
-			redrawDelay = 1,
+			redrawInterval = 1,
 			roundFontSizeToNearestPowerOfTwo = true,
 			maxFontSize = Infinity,
 			material = {},
@@ -26,7 +26,7 @@
 		} = {}) {
 			super(new THREE.SpriteMaterial(Object.assign({}, material, {map: new THREE.TextTexture(texture)})));
 			this._textSize = textSize;
-			this.redrawDelay = redrawDelay;
+			this.redrawInterval = redrawInterval;
 			this.roundFontSizeToNearestPowerOfTwo = roundFontSizeToNearestPowerOfTwo;
 			this.maxFontSize = maxFontSize;
 			this.lastRedraw = 0;
