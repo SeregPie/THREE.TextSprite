@@ -1,11 +1,14 @@
+html, body {
+	height: 100%;
+	min-height: 100%;
+}
+
 html {
 	box-sizing: border-box;
-	height: 100%;
 	line-height: 1;
 }
 
 body {
-	height: 100%;
 	overflow: hidden;
 }
 
@@ -25,7 +28,7 @@ body {
 	z-index: 1;
 	left: 16px;
 	top: 16px;
-	opacity: .8;
+	opacity: calc(4/5);
 	color: White;
 	font-size: 24px;
 	font-family: Arial, Helvetica, sans-serif;
