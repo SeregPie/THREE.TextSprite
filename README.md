@@ -58,7 +58,7 @@ The size of the text.
 
 `.redrawInterval = 1`
 
-The minimum time that must elapse before the canvas is redrawn. If 0, the canvas is redrawn immediately whenever `TextSprite` is rendered. Otherwise the redrawing is deferred.
+The minimum time that must elapse before the canvas is redrawn. If 0, the canvas is redrawn immediately whenever `TextSprite` is rendered, otherwise the redrawing is deferred.
 
 ---
 
