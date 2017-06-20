@@ -23,7 +23,7 @@ body {
 	padding: 0;
 }
 
-.github {
+#GitHubLink {
 	position: absolute;
 	z-index: 1;
 	left: 16px;
