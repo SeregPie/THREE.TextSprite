@@ -1,15 +1,14 @@
 (function(THREE) {
 
 	let onBeforeRender = function(renderer, a, camera) {
-		let now = Date.now();
-		if (now > this.lastRedraw + this.redrawInterval) {
-			let redraw = this.redraw.bind(this, renderer, camera);
+		if (Date.now() > this.lastRedraw + this.redrawInterval) {
 			if (this.redrawInterval) {
-				setTimeout(redraw);
+				setTimeout(() => {
+					this.redraw(renderer, camera);
+				});
 			} else {
-				redraw();
+				this.redraw(renderer, camera);
 			}
-			this.lastRedraw = now;
 		} else {
 			this.updateScale();
 		}
@@ -30,11 +29,14 @@
 			this.roundFontSizeToNearestPowerOfTwo = roundFontSizeToNearestPowerOfTwo;
 			this.maxFontSize = maxFontSize;
 			this.lastRedraw = 0;
-			this.updateScale();
 
 			this._renderMesh = new THREE.Mesh();
 			this._renderMesh.onBeforeRender = onBeforeRender.bind(this);
 			this.add(this._renderMesh);
+		}
+
+		updateScale() {
+			this.scale.set(this.material.map.aspect, 1, 1).multiplyScalar(this.textSize);
 		}
 
 		get textSize() {
@@ -44,19 +46,17 @@
 		set textSize(value) {
 			if (this._textSize !== value) {
 				this._textSize = value;
-				this.updateScale();
 			}
 		}
 
-		updateScale() {
-			this.scale.set(this.material.map.aspect, 1, 1).multiplyScalar(this.textSize);
-		}
-
-		calculateOptimalFontSize(renderer, camera) {
-			if (renderer.domElement.width && renderer.domElement.height && !this.material.map.blank) {
+		computeOptimalFontSize(renderer, camera) {
+			if (renderer.domElement.width && renderer.domElement.height && this.material.map.linesCount) {
 				let distance = this.getWorldPosition().distanceTo(camera.getWorldPosition());
 				if (distance) {
-					return Math.round(renderer.domElement.height * this.getWorldScale().y / this.material.map.lineHeight / distance);
+					let heightInPixels = this.getWorldScale().y * renderer.domElement.height / distance;
+					if (heightInPixels) {
+						return Math.round(heightInPixels / (this.material.map.linesCount + 2 * this.material.map.padding));
+					}
 				}
 			}
 			return 0;
@@ -64,12 +64,13 @@
 
 		redraw(renderer, camera) {
 			this.updateScale();
-			let fontSize = this.calculateOptimalFontSize(renderer, camera);
+			let fontSize = this.computeOptimalFontSize(renderer, camera);
 			if (this.roundFontSizeToNearestPowerOfTwo) {
 				fontSize = THREE.Math.nearestPowerOfTwo(fontSize);
 			}
 			fontSize = Math.min(fontSize, this.maxFontSize);
 			this.material.map.fontSize = fontSize;
+			this.lastRedraw = Date.now();
 		}
 
 		dispose() {
