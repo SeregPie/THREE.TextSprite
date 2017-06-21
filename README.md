@@ -2,7 +2,7 @@
 
 `class THREE.TextSprite extends THREE.Sprite`
 
-An instance of `TextSprite` automatically calculates the optimal font size depending on the distance to the camera and the size of the renderer canvas.
+An instance of `TextSprite` automatically computes the optimal font size depending on the distance to the camera and the size of the renderer canvas.
 
 ## demo
 
