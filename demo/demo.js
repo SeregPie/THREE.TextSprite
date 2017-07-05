@@ -1,7 +1,11 @@
 (function() {
 
+	let _random = function(start, end) {
+		return Math.floor(Math.random() * (end - start)) + start;
+	};
+
 	let _sample = function(array) {
-		return array[Math.floor(Math.random() * array.length)];
+		return array[_random(0, array.length)];
 	};
 
 	let _randomText = (function() {
@@ -22,7 +26,27 @@
 		];
 
 		return function() {
-			return _sample(adjectives) + ' ' + _sample(nouns);
+			return Array
+				.from({length: (() => {
+					if (_random(0, 6) === 0) {
+						return 3;
+					} else
+					if (_random(0, 4) === 0) {
+						return 2;
+					} else {
+						return 1;
+					}
+				})()}, () => {
+					if (_random(0, 7) === 0) {
+						return _sample(nouns);
+					} else
+					if (_random(0, 7) === 0) {
+						return _sample(adjectives);
+					} else {
+						return _sample(adjectives) + ' ' + _sample(nouns);
+					}
+				})
+				.join('\n');
 		};
 	})();
 

@@ -39,6 +39,11 @@
 			this.scale.set(this.material.map.aspect, 1, 1).multiplyScalar(this.textSize);
 		}
 
+		updateMatrix(...args) {
+			this.updateScale();
+			return super.updateMatrix(...args);
+		}
+
 		get textSize() {
 			return this._textSize;
 		}
