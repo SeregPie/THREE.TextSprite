@@ -13,6 +13,28 @@ An instance of `TextSprite` automatically computes the optimal font size dependi
 - [THREE](https://github.com/mrdoob/three.js)
 - [THREE.TextTexture](https://github.com/SeregPie/THREE.TextTexture)
 
+## installation
+
+Install the [package](https://www.npmjs.com/package/three.textsprite) via npm.
+
+```sh
+
+npm install three.textsprite
+
+```
+
+---
+
+If you prefer, you can include the code directly in your project.
+
+```html
+
+<script src="https://unpkg.com/three"></script>
+<script src="https://unpkg.com/three.texttexture"></script>
+<script src="https://unpkg.com/three.textsprite"></script>
+
+```
+
 ## members
 
 `.constructor({textSize, redrawInterval, roundFontSizeToNearestPowerOfTwo, maxFontSize, texture, material})`
@@ -28,12 +50,12 @@ let sprite = new THREE.TextSprite({
   textSize: 10,
   redrawInterval: 250,
   texture: {
-    text: 'Carpe Diem',
-    fontFamily: 'Arial, Helvetica, sans-serif',
+	text: 'Carpe Diem',
+	fontFamily: 'Arial, Helvetica, sans-serif',
   },
   material: {
-    color: 0xffbbff,
-    fog: true,
+	color: 0xffbbff,
+	fog: true,
   },
 });
 scene.add(sprite);
