@@ -88,4 +88,4 @@
 		isTextSprite: true,
 	});
 
-}).call(this, THREE);
+})(THREE);

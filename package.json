@@ -1,38 +1,35 @@
 {
-  "name": "three.textsprite",
-  "version": "17.8.6",
-  "description": "Automatically computes the optimal font size depending on the distance to the camera and the size of the renderer canvas.",
-  "main": "THREE.TextSprite.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/SeregPie/THREE.TextSprite.git"
-  },
-  "keywords": [
-    "threejs",
-    "class",
-    "plugin",
-    "3d",
-    "group",
-    "text",
-    "texture",
-    "object",
-    "resolution",
-    "scale",
-    "size",
-    "font",
-    "canvas"
-  ],
-  "author": "Sergej Sintschilin",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/SeregPie/THREE.TextSprite/issues"
-  },
-  "homepage": "https://github.com/SeregPie/THREE.TextSprite#readme",
-  "dependencies": {
-    "three": "^0.86.0",
-    "three.texttexture": "^17.8.6"
-  }
+	"name": "three.textsprite",
+	"version": "17.9.10",
+	"description": "Automatically computes the optimal font size depending on the distance to the camera and the size of the renderer canvas.",
+	"main": "THREE.TextSprite.js",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/SeregPie/THREE.TextSprite.git"
+	},
+	"keywords": [
+		"threejs",
+		"class",
+		"plugin",
+		"3d",
+		"group",
+		"text",
+		"texture",
+		"object",
+		"resolution",
+		"scale",
+		"size",
+		"font",
+		"canvas"
+	],
+	"author": "Sergej Sintschilin",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/SeregPie/THREE.TextSprite/issues"
+	},
+	"homepage": "https://github.com/SeregPie/THREE.TextSprite#readme",
+	"dependencies": {
+		"three": "^0.87.1",
+		"three.texttexture": "^17.9.10"
+	}
 }

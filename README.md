@@ -13,7 +13,7 @@ An instance of `TextSprite` automatically computes the optimal font size dependi
 - [THREE](https://github.com/mrdoob/three.js)
 - [THREE.TextTexture](https://github.com/SeregPie/THREE.TextTexture)
 
-## installation
+## setup
 
 Install the [package](https://www.npmjs.com/package/three.textsprite) via npm.
 
@@ -25,7 +25,7 @@ npm install three.textsprite
 
 ---
 
-If you prefer, you can include the code directly in your project.
+Include the code in your page via a CDN.
 
 ```html
 
