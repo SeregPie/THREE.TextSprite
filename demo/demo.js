@@ -1,11 +1,7 @@
 (function() {
 
-	let _randomInt = function(start, end) {
-		return Math.floor(Math.random() * (end - start)) + start;
-	};
-
-	let _sample = function(array) {
-		return array[_randomInt(0, array.length)];
+	let Array_sample = function(array) {
+		return array[Math.floor(Math.random() * array.length)];
 	};
 
 	let _randomText = (function() {
@@ -28,22 +24,22 @@
 		return function() {
 			return Array
 				.from({length: (() => {
-					if (_randomInt(0, 6) === 0) {
+					if (Math.random() < 1/6) {
 						return 3;
 					} else
-					if (_randomInt(0, 4) === 0) {
+					if (Math.random() < 1/4) {
 						return 2;
 					} else {
 						return 1;
 					}
 				})()}, () => {
-					if (_randomInt(0, 7) === 0) {
-						return _sample(nouns);
+					if (Math.random() < 1/7) {
+						return Array_sample(nouns);
 					} else
-					if (_randomInt(0, 7) === 0) {
-						return _sample(adjectives);
+					if (Math.random() < 1/7) {
+						return Array_sample(adjectives);
 					} else {
-						return _sample(adjectives) + ' ' + _sample(nouns);
+						return Array_sample(adjectives) + ' ' + Array_sample(nouns);
 					}
 				})
 				.join('\n');
@@ -51,7 +47,7 @@
 	})();
 
 	let _randomFontFamily = (function() {
-		let faces = [
+		let fontFamilyValues = [
 			'Georgia, serif',
 			'"Palatino Linotype", "Book Antiqua", Palatino, serif',
 			'"Times New Roman", Times, serif',
@@ -70,7 +66,7 @@
 		];
 
 		return function() {
-			return _sample(faces);
+			return Array_sample(fontFamilyValues);
 		};
 	})();
 
@@ -78,7 +74,7 @@
 		return Math.random() * 0xffffff;
 	};
 
-	let n = 100;
+	let n = 1;
 
 	let _randomTextSize = function() {
 		return (1/32 + Math.random()) * n/2;
@@ -108,9 +104,7 @@
 			},
 		});
 		sprite.position
-			.setX(Math.random())
-			.setY(Math.random())
-			.setZ(Math.random())
+			.set(Math.random(), Math.random(), Math.random())
 			.subScalar(1/2)
 			.setLength(1 + Math.random())
 			.multiplyScalar(2*n);
@@ -126,20 +120,22 @@
 	controls.zoomSpeed = 1;
 	controls.keyPanSpeed = 1/2;
 
-	let render = function() {
+	let renderScene = function() {
 		renderer.setSize(document.body.clientWidth, document.body.clientHeight);
-		camera.aspect = document.body.clientWidth / document.body.clientHeight;
+		camera.aspect = renderer.domElement.clientWidth / renderer.domElement.clientHeight;
 		camera.updateProjectionMatrix();
-		controls.update();
 		renderer.render(scene, camera);
 	};
 
-	window.addEventListener('resize', render, false);
+	window.addEventListener('resize', renderScene, false);
 
-	(function animate() {
-		requestAnimationFrame(animate);
-		render();
-	})();
+	let startToRenderScene = function() {
+		setTimeout(() => {
+			requestAnimationFrame(startToRenderScene);
+		}, 1000/60);
+		renderScene();
+	};
+	startToRenderScene();
 
 	let gui = new dat.GUI();
 
