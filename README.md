@@ -50,12 +50,12 @@ let sprite = new THREE.TextSprite({
   textSize: 10,
   redrawInterval: 250,
   texture: {
-	text: 'Carpe Diem',
-	fontFamily: 'Arial, Helvetica, sans-serif',
+    text: 'Carpe Diem',
+    fontFamily: 'Arial, Helvetica, sans-serif',
   },
   material: {
-	color: 0xffbbff,
-	fog: true,
+    color: 0xffbbff,
+    fog: true,
   },
 });
 scene.add(sprite);
