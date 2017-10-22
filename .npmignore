@@ -1,3 +1,7 @@
-/node_modules/
+.eslintrc.js
+
+/src/
+/rollup.config.js
+
 /demo/
 /index.html
