@@ -1,17 +1,7 @@
 import THREE from 'three';
 
 let onBeforeRender = function(renderer, a, camera) {
-	if (Date.now() > this.lastRedraw + this.redrawInterval) {
-		if (this.redrawInterval) {
-			setTimeout(() => {
-				this.redraw(renderer, camera);
-			});
-		} else {
-			this.redraw(renderer, camera);
-		}
-	} else {
-		this.updateScale();
-	}
+	this.redraw(renderer, camera);
 };
 
 let TextSprite = class extends THREE.Sprite {
@@ -24,7 +14,7 @@ let TextSprite = class extends THREE.Sprite {
 		texture = {},
 	} = {}) {
 		super(new THREE.SpriteMaterial(Object.assign({}, material, {map: new THREE.TextTexture(texture)})));
-		this._textSize = textSize;
+		this.textSize = textSize;
 		this.redrawInterval = redrawInterval;
 		this.roundFontSizeToNearestPowerOfTwo = roundFontSizeToNearestPowerOfTwo;
 		this.maxFontSize = maxFontSize;
@@ -44,23 +34,13 @@ let TextSprite = class extends THREE.Sprite {
 		return super.updateMatrix(...args);
 	}
 
-	get textSize() {
-		return this._textSize;
-	}
-
-	set textSize(value) {
-		if (this._textSize !== value) {
-			this._textSize = value;
-		}
-	}
-
 	computeOptimalFontSize(renderer, camera) {
-		if (renderer.domElement.width && renderer.domElement.height && this.material.map.linesCount) {
+		if (renderer.domElement.width && renderer.domElement.height && this.material.map.textBoxHeight) {
 			let distance = this.getWorldPosition().distanceTo(camera.getWorldPosition());
 			if (distance) {
 				let heightInPixels = this.getWorldScale().y * renderer.domElement.height / distance;
 				if (heightInPixels) {
-					return Math.round(heightInPixels / (this.material.map.linesCount + 2 * this.material.map.padding));
+					return Math.round(heightInPixels / this.material.map.paddingBoxHeight);
 				}
 			}
 		}
@@ -68,6 +48,18 @@ let TextSprite = class extends THREE.Sprite {
 	}
 
 	redraw(renderer, camera) {
+		if (this.lastRedraw + this.redrawInterval < Date.now()) {
+			if (this.redrawInterval) {
+				setTimeout(() => {
+					this.redrawNow(renderer, camera);
+				}, 1);
+			} else {
+				this.redrawNow(renderer, camera);
+			}
+		}
+	}
+
+	redrawNow(renderer, camera) {
 		this.updateScale();
 		let fontSize = this.computeOptimalFontSize(renderer, camera);
 		if (this.roundFontSizeToNearestPowerOfTwo) {
