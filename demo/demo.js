@@ -90,6 +90,7 @@
 	camera.position.set(0, 0, 8*n);
 
 	let redrawInterval = 1;
+	let autoRedraw = true;
 
 	let sprites = Array.from({length: 111}, () => {
 		let sprite = new THREE.TextSprite({
@@ -101,6 +102,7 @@
 			texture: {
 				text: _randomText(),
 				fontFamily: _randomFontFamily(),
+				autoRedraw,
 			},
 		});
 		sprite.position
@@ -156,6 +158,14 @@
 	}, 'textSize');
 
 	gui.add({
+		fontFamily() {
+			sprites.forEach(sprite => {
+				sprite.material.map.fontFamily = _randomFontFamily();
+			});
+		},
+	}, 'fontFamily');
+
+	gui.add({
 		get redrawInterval() {
 			return redrawInterval;
 		},
@@ -169,11 +179,16 @@
 	}, 'redrawInterval', 0, 2000).step(1);
 
 	gui.add({
-		fontFamily() {
+		get autoRedraw() {
+			return autoRedraw;
+		},
+
+		set autoRedraw(value) {
+			autoRedraw = value;
 			sprites.forEach(sprite => {
-				sprite.material.map.fontFamily = _randomFontFamily();
+				sprite.material.map.autoRedraw = autoRedraw;
 			});
 		},
-	}, 'fontFamily');
+	}, 'autoRedraw');
 
 })();

@@ -67,6 +67,9 @@ let TextSprite = class extends THREE.Sprite {
 		}
 		fontSize = Math.min(fontSize, this.maxFontSize);
 		this.material.map.fontSize = fontSize;
+		if (!this.material.map.autoRedraw) {
+			this.material.map.redraw();
+		}
 		this.lastRedraw = Date.now();
 	}
 
