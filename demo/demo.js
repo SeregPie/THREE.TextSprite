@@ -150,33 +150,12 @@
 	}, 'text');
 
 	gui.add({
-		textSize() {
-			sprites.forEach(sprite => {
-				sprite.textSize = _randomTextSize();
-			});
-		},
-	}, 'textSize');
-
-	gui.add({
 		fontFamily() {
 			sprites.forEach(sprite => {
 				sprite.material.map.fontFamily = _randomFontFamily();
 			});
 		},
 	}, 'fontFamily');
-
-	gui.add({
-		get redrawInterval() {
-			return redrawInterval;
-		},
-
-		set redrawInterval(value) {
-			redrawInterval = value;
-			sprites.forEach(sprite => {
-				sprite.redrawInterval = redrawInterval;
-			});
-		},
-	}, 'redrawInterval', 0, 2000).step(1);
 
 	gui.add({
 		get autoRedraw() {
@@ -190,5 +169,26 @@
 			});
 		},
 	}, 'autoRedraw');
+
+	gui.add({
+		textSize() {
+			sprites.forEach(sprite => {
+				sprite.textSize = _randomTextSize();
+			});
+		},
+	}, 'textSize');
+
+	gui.add({
+		get redrawInterval() {
+			return redrawInterval;
+		},
+
+		set redrawInterval(value) {
+			redrawInterval = value;
+			sprites.forEach(sprite => {
+				sprite.redrawInterval = redrawInterval;
+			});
+		},
+	}, 'redrawInterval', 0, 2000).step(1);
 
 })();
