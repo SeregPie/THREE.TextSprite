@@ -44,7 +44,7 @@ Include the code in your page via a CDN.
 | `texture` | The parameters to pass to the constructor of [`TextTexture`](https://github.com/SeregPie/THREE.TextTexture). |
 | `material` | The parameters to pass to the constructor of [`SpriteMaterial`](https://threejs.org/docs/index.html#api/materials/SpriteMaterial). |
 
-```javascript
+```js
 
 let sprite = new THREE.TextSprite({
   textSize: 10,
