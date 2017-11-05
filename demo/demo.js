@@ -1,11 +1,11 @@
 (function() {
 
-	let Array_sample = function(array) {
+	var Array_sample = function(array) {
 		return array[Math.floor(Math.random() * array.length)];
 	};
 
-	let _randomText = (function() {
-		let adjectives = [
+	var _randomText = (function() {
+		var adjectives = [
 			'able', 'bad', 'best', 'better', 'big', 'black', 'certain', 'clear', 'different', 'early',
 			'easy', 'economic', 'federal', 'free', 'full', 'good', 'great', 'hard', 'high', 'human',
 			'important', 'international', 'large', 'late', 'little', 'local', 'long', 'low', 'major', 'military',
@@ -13,7 +13,7 @@
 			'right', 'small', 'social', 'special', 'strong', 'sure', 'true', 'white', 'whole', 'young',
 		];
 
-		let nouns = [
+		var nouns = [
 			'area', 'book', 'business', 'case', 'child', 'company', 'country', 'day', 'eye', 'fact',
 			'family', 'government', 'group', 'hand', 'home', 'job', 'life', 'lot', 'man', 'money',
 			'month', 'mother', 'Mr', 'night', 'number', 'part', 'people', 'place', 'point', 'problem',
@@ -23,31 +23,15 @@
 
 		return function() {
 			return Array
-				.from({length: (() => {
-					if (Math.random() < 1/6) {
-						return 3;
-					} else
-					if (Math.random() < 1/4) {
-						return 2;
-					} else {
-						return 1;
-					}
-				})()}, () => {
-					if (Math.random() < 1/7) {
-						return Array_sample(nouns);
-					} else
-					if (Math.random() < 1/7) {
-						return Array_sample(adjectives);
-					} else {
-						return Array_sample(adjectives) + ' ' + Array_sample(nouns);
-					}
+				.from({length: (Math.random() < 1/6) ? 3 : (Math.random() < 1/4) ? 2 : 1}, function() {
+					return (Math.random() < 1/4) ? Array_sample((Math.random() < 1/2) ? nouns : adjectives) : Array_sample(adjectives) + ' ' + Array_sample(nouns);
 				})
 				.join('\n');
 		};
 	})();
 
-	let _randomFontFamily = (function() {
-		let fontFamilyValues = [
+	var _randomFontFamily = (function() {
+		var fontFamilyValues = [
 			'Georgia, serif',
 			'"Palatino Linotype", "Book Antiqua", Palatino, serif',
 			'"Times New Roman", Times, serif',
@@ -70,39 +54,39 @@
 		};
 	})();
 
-	let _randomColor = function() {
+	var _randomColor = function() {
 		return Math.random() * 0xffffff;
 	};
 
-	let n = 1;
+	var n = 1;
 
-	let _randomTextSize = function() {
+	var _randomTextSize = function() {
 		return (1/32 + Math.random()) * n/2;
 	};
 
-	let renderer = new THREE.WebGLRenderer({antialias: true});
+	var renderer = new THREE.WebGLRenderer({antialias: true});
 	renderer.setClearColor(0x000000);
 	document.body.appendChild(renderer.domElement);
 
-	let scene = new THREE.Scene();
+	var scene = new THREE.Scene();
 
-	let camera = new THREE.PerspectiveCamera(75, 1, n/128, 128*n);
+	var camera = new THREE.PerspectiveCamera(75, 1, n/128, 128*n);
 	camera.position.set(0, 0, 8*n);
 
-	let redrawInterval = 1;
-	let autoRedraw = true;
+	var redrawInterval = 1;
+	var autoRedraw = true;
 
-	let sprites = Array.from({length: 111}, () => {
-		let sprite = new THREE.TextSprite({
+	var sprites = Array.from({length: 111}, function() {
+		var sprite = new THREE.TextSprite({
 			textSize: _randomTextSize(),
-			redrawInterval,
+			redrawInterval: redrawInterval,
 			material: {
 				color: _randomColor(),
 			},
 			texture: {
 				text: _randomText(),
 				fontFamily: _randomFontFamily(),
-				autoRedraw,
+				autoRedraw: autoRedraw,
 			},
 		});
 		sprite.position
@@ -110,11 +94,11 @@
 			.subScalar(1/2)
 			.setLength(1 + Math.random())
 			.multiplyScalar(2*n);
+		scene.add(sprite);
 		return sprite;
 	});
-	scene.add(...sprites);
 
-	let controls = new THREE.OrbitControls(camera, renderer.domElement);
+	var controls = new THREE.OrbitControls(camera, renderer.domElement);
 	controls.maxDistance = camera.far/2;
 	controls.enableDamping = true;
 	controls.dampingFactor = 1/8;
@@ -122,7 +106,7 @@
 	controls.zoomSpeed = 1;
 	controls.keyPanSpeed = 1/2;
 
-	let renderScene = function() {
+	var renderScene = function() {
 		renderer.setSize(document.body.clientWidth, document.body.clientHeight);
 		camera.aspect = renderer.domElement.clientWidth / renderer.domElement.clientHeight;
 		camera.updateProjectionMatrix();
@@ -131,64 +115,67 @@
 
 	window.addEventListener('resize', renderScene, false);
 
-	let startToRenderScene = function() {
-		setTimeout(() => {
+	var startToRenderScene = function() {
+		setTimeout(function() {
 			requestAnimationFrame(startToRenderScene);
 		}, 1000/60);
 		renderScene();
 	};
 	startToRenderScene();
 
-	let gui = new dat.GUI();
+	var gui = new dat.GUI();
+	(function() {
+		var guiFolder = gui.addFolder('texture');
+		guiFolder.add({
+			text: function() {
+				sprites.forEach(function(sprite) {
+					sprite.material.map.text = _randomText();
+				});
+			},
+		}, 'text');
+		guiFolder.add({
+			fontFamily: function() {
+				sprites.forEach(function(sprite) {
+					sprite.material.map.fontFamily = _randomFontFamily();
+				});
+			},
+		}, 'fontFamily');
+		guiFolder.add(Object.defineProperty({}, 'autoRedraw', {
+			get: function() {
+				return autoRedraw;
+			},
 
-	gui.add({
-		text() {
-			sprites.forEach(sprite => {
-				sprite.material.map.text = _randomText();
-			});
-		},
-	}, 'text');
+			set: function(value) {
+				autoRedraw = value;
+				sprites.forEach(function(sprite) {
+					sprite.material.map.autoRedraw = autoRedraw;
+				});
+			},
+		}), 'autoRedraw');
+		guiFolder.open();
+	})();
+	(function() {
+		var guiFolder = gui.addFolder('sprite');
+		guiFolder.add({
+			textSize: function() {
+				sprites.forEach(function(sprite) {
+					sprite.textSize = _randomTextSize();
+				});
+			},
+		}, 'textSize');
+		guiFolder.add(Object.defineProperty({}, 'redrawInterval', {
+			get: function() {
+				return redrawInterval;
+			},
 
-	gui.add({
-		fontFamily() {
-			sprites.forEach(sprite => {
-				sprite.material.map.fontFamily = _randomFontFamily();
-			});
-		},
-	}, 'fontFamily');
-
-	gui.add({
-		get autoRedraw() {
-			return autoRedraw;
-		},
-
-		set autoRedraw(value) {
-			autoRedraw = value;
-			sprites.forEach(sprite => {
-				sprite.material.map.autoRedraw = autoRedraw;
-			});
-		},
-	}, 'autoRedraw');
-
-	gui.add({
-		textSize() {
-			sprites.forEach(sprite => {
-				sprite.textSize = _randomTextSize();
-			});
-		},
-	}, 'textSize');
-
-	gui.add({
-		get redrawInterval() {
-			return redrawInterval;
-		},
-
-		set redrawInterval(value) {
-			redrawInterval = value;
-			sprites.forEach(sprite => {
-				sprite.redrawInterval = redrawInterval;
-			});
-		},
-	}, 'redrawInterval', 0, 2000).step(1);
+			set: function(value) {
+				redrawInterval = value;
+				sprites.forEach(function(sprite) {
+					sprite.redrawInterval = redrawInterval;
+				});
+			},
+		}), 'redrawInterval', 0, 2000, 1);
+		guiFolder.open();
+	})();
 
 })();

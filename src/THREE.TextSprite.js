@@ -1,6 +1,7 @@
 import THREE from 'three';
+import 'three.texttexture';
 
-let onBeforeRender = function(renderer, a, camera) {
+let onBeforeRender = function(renderer, scene, camera) {
 	this.redraw(renderer, camera);
 };
 
@@ -23,6 +24,10 @@ let TextSprite = class extends THREE.Sprite {
 		this._renderMesh = new THREE.Mesh();
 		this._renderMesh.onBeforeRender = onBeforeRender.bind(this);
 		this.add(this._renderMesh);
+	}
+
+	get isTextSprite() {
+		return true;
 	}
 
 	updateScale() {
@@ -79,10 +84,4 @@ let TextSprite = class extends THREE.Sprite {
 	}
 };
 
-Object.assign(TextSprite.prototype, {
-	isTextSprite: true,
-});
-
-Object.assign(THREE, {TextSprite});
-
-export default TextSprite;
+THREE.TextSprite = TextSprite;
