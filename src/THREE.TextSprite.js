@@ -5,11 +5,10 @@ let onBeforeRender = function(renderer, scene, camera) {
 	this.redraw(renderer, camera);
 };
 
-let TextSprite = class extends THREE.Sprite {
+THREE.TextSprite = class extends THREE.Sprite {
 	constructor({
 		textSize = 1,
 		redrawInterval = 1,
-		roundFontSizeToNearestPowerOfTwo = true,
 		maxFontSize = Infinity,
 		material = {},
 		texture = {},
@@ -17,7 +16,6 @@ let TextSprite = class extends THREE.Sprite {
 		super(new THREE.SpriteMaterial(Object.assign({}, material, {map: new THREE.TextTexture(texture)})));
 		this.textSize = textSize;
 		this.redrawInterval = redrawInterval;
-		this.roundFontSizeToNearestPowerOfTwo = roundFontSizeToNearestPowerOfTwo;
 		this.maxFontSize = maxFontSize;
 		this.lastRedraw = 0;
 
@@ -67,9 +65,7 @@ let TextSprite = class extends THREE.Sprite {
 	redrawNow(renderer, camera) {
 		this.updateScale();
 		let fontSize = this.computeOptimalFontSize(renderer, camera);
-		if (this.roundFontSizeToNearestPowerOfTwo) {
-			fontSize = THREE.Math.nearestPowerOfTwo(fontSize);
-		}
+		fontSize = THREE.Math.floorPowerOfTwo(fontSize);
 		fontSize = Math.min(fontSize, this.maxFontSize);
 		this.material.map.fontSize = fontSize;
 		if (!this.material.map.autoRedraw) {
@@ -83,5 +79,3 @@ let TextSprite = class extends THREE.Sprite {
 		this.material.dispose();
 	}
 };
-
-THREE.TextSprite = TextSprite;

@@ -45,7 +45,7 @@ Include [polyfills](https://polyfill.io/) to support older browsers.
 
 ## members
 
-`.constructor({textSize, redrawInterval, roundFontSizeToNearestPowerOfTwo, maxFontSize, texture, material})`
+`.constructor({textSize, redrawInterval, maxFontSize, texture, material})`
 
 | argument | description |
 | ---: | :--- |
@@ -89,12 +89,6 @@ The size of the text.
 `.redrawInterval = 1`
 
 The minimum time that must elapse before the canvas is redrawn. If 0, the canvas is redrawn immediately whenever `TextSprite` is rendered, otherwise the redrawing is deferred.
-
----
-
-`.roundFontSizeToNearestPowerOfTwo = true`
-
-If `true`, the calculated font size will be rounded to the nearest power of 2.
 
 ---
 

@@ -1,4 +1,4 @@
-.eslintrc.js
+/.eslintrc.js
 
 /src/
 /rollup.config.js
