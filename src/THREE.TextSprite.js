@@ -65,7 +65,7 @@ THREE.TextSprite = class extends THREE.Sprite {
 	redrawNow(renderer, camera) {
 		this.updateScale();
 		let fontSize = this.computeOptimalFontSize(renderer, camera);
-		fontSize = THREE.Math.floorPowerOfTwo(fontSize);
+		fontSize = THREE.Math.ceilPowerOfTwo(fontSize);
 		fontSize = Math.min(fontSize, this.maxFontSize);
 		this.material.map.fontSize = fontSize;
 		if (!this.material.map.autoRedraw) {
