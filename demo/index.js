@@ -61,7 +61,7 @@
 	var n = 1;
 
 	var _randomTextSize = function() {
-		return (1/32 + Math.random()) * n/2;
+		return (1/64 + Math.random()) * n/4;
 	};
 
 	var renderer = new THREE.WebGLRenderer({antialias: true});

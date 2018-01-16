@@ -29,7 +29,7 @@ THREE.TextSprite = class extends THREE.Sprite {
 	}
 
 	updateScale() {
-		this.scale.set(this.material.map.aspect, 1, 1).multiplyScalar(this.textSize);
+		this.scale.set(this.material.map.aspect, 1, 1).multiplyScalar(this.textSize * this.material.map.paddingBoxHeight);
 	}
 
 	updateMatrix(...args) {
@@ -38,7 +38,7 @@ THREE.TextSprite = class extends THREE.Sprite {
 	}
 
 	computeOptimalFontSize(renderer, camera) {
-		if (renderer.domElement.width && renderer.domElement.height && this.material.map.textBoxHeight) {
+		if (renderer.domElement.width && renderer.domElement.height && this.material.map.linesCount) {
 			let distance = this.getWorldPosition().distanceTo(camera.getWorldPosition());
 			if (distance) {
 				let heightInPixels = this.getWorldScale().y * renderer.domElement.height / distance;
