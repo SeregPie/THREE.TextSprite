@@ -1,46 +1,46 @@
 {
-  "name": "three.textsprite",
-  "version": "17.11.23",
-  "description": "Automatically computes the optimal font size depending on the distance to the camera and the size of the renderer canvas.",
-  "main": "THREE.TextSprite.js",
-  "scripts": {
-	"build": "rollup -c",
-	"dev": "rollup -c -w",
-	"prepublishOnly": "npm run build"
-  },
-  "repository": {
-	"type": "git",
-	"url": "git+https://github.com/SeregPie/THREE.TextSprite.git"
-  },
-  "keywords": [
-	"three",
-	"class",
-	"plugin",
-	"3d",
-	"group",
-	"text",
-	"texture",
-	"object",
-	"resolution",
-	"scale",
-	"size",
-	"font",
-	"canvas"
-  ],
-  "author": "Sergej Sintschilin",
-  "license": "MIT",
-  "bugs": {
-	"url": "https://github.com/SeregPie/THREE.TextSprite/issues"
-  },
-  "homepage": "https://github.com/SeregPie/THREE.TextSprite#readme",
-  "dependencies": {
-	"three": "^0.88.0",
-	"three.texttexture": "^17.11.21"
-  },
-  "devDependencies": {
-	"eslint": "^4.11.0",
-	"rollup": "^0.51.8",
-	"rollup-plugin-buble": "^0.18.0",
-	"rollup-plugin-uglify": "^2.0.1"
-  }
+	"name": "three.textsprite",
+	"version": "17.11.23",
+	"description": "Automatically computes the optimal font size depending on the distance to the camera and the size of the renderer canvas.",
+	"main": "THREE.TextSprite.js",
+	"scripts": {
+		"build": "rollup -c",
+		"dev": "rollup -c -w",
+		"prepublishOnly": "npm run build"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/SeregPie/THREE.TextSprite.git"
+	},
+	"keywords": [
+		"3d",
+		"canvas",
+		"class",
+		"font",
+		"group",
+		"object",
+		"plugin",
+		"resolution",
+		"scale",
+		"size",
+		"three",
+		"text",
+		"texture"
+	],
+	"author": "Sergej Sintschilin",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/SeregPie/THREE.TextSprite/issues"
+	},
+	"homepage": "https://github.com/SeregPie/THREE.TextSprite#readme",
+	"dependencies": {
+		"three": "^0.89.0",
+		"three.texttexture": "^18.1.14"
+	},
+	"devDependencies": {
+		"eslint": "^4.15.0",
+		"rollup": "^0.54.0",
+		"rollup-plugin-buble": "^0.18.0",
+		"rollup-plugin-uglify": "^2.0.1"
+	}
 }

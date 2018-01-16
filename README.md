@@ -15,32 +15,26 @@ An instance of `TextSprite` automatically computes the optimal font size dependi
 
 ## setup
 
-Install the [package](https://www.npmjs.com/package/three.textsprite) via npm.
+### npm
 
-```sh
-
+```shell
 npm install three.textsprite
+```
 
+### browser
+
+```html
+<script src="https://unpkg.com/three"></script>
+<script src="https://unpkg.com/three.texttexture"></script>
+<script src="https://unpkg.com/three.textsprite"></script>
 ```
 
 ---
 
-Include the code in your page via a CDN.
-
-```html
-
-<script src="https://unpkg.com/three"></script>
-<script src="https://unpkg.com/three.texttexture"></script>
-<script src="https://unpkg.com/three.textsprite"></script>
-
-```
-
 Include [polyfills](https://polyfill.io/) to support older browsers.
 
 ```html
-
 <script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
-
 ```
 
 ## members
@@ -52,8 +46,7 @@ Include [polyfills](https://polyfill.io/) to support older browsers.
 | `texture` | The parameters to pass to the constructor of [`TextTexture`](https://github.com/SeregPie/THREE.TextTexture). |
 | `material` | The parameters to pass to the constructor of [`SpriteMaterial`](https://threejs.org/docs/index.html#api/materials/SpriteMaterial). |
 
-```js
-
+```javascript
 let sprite = new THREE.TextSprite({
   textSize: 10,
   redrawInterval: 250,
@@ -67,7 +60,6 @@ let sprite = new THREE.TextSprite({
   },
 });
 scene.add(sprite);
-
 ```
 
 ---
