@@ -29,14 +29,6 @@ npm install three.textsprite
 <script src="https://unpkg.com/three.textsprite"></script>
 ```
 
----
-
-Include [polyfills](https://polyfill.io/) to support older browsers.
-
-```html
-<script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
-```
-
 ## members
 
 `.constructor({textSize, redrawInterval, maxFontSize, texture, material})`
