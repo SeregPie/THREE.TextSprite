@@ -1,8 +1,6 @@
 import THREE from 'three';
 import 'three.texttexture';
 
-import onBeforeRender from './onBeforeRender';
-
 THREE.TextSprite = class extends THREE.Sprite {
 	constructor({
 		textSize = 1,
@@ -16,14 +14,14 @@ THREE.TextSprite = class extends THREE.Sprite {
 		this.redrawInterval = redrawInterval;
 		this.maxFontSize = maxFontSize;
 		this.lastRedraw = 0;
-
-		this._renderMesh = new THREE.Mesh();
-		this._renderMesh.onBeforeRender = onBeforeRender.bind(this);
-		this.add(this._renderMesh);
 	}
 
 	get isTextSprite() {
 		return true;
+	}
+
+	onBeforeRender(renderer, scene, camera) {
+		this.redraw(renderer, camera);
 	}
 
 	updateScale() {
