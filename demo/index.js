@@ -1,37 +1,17 @@
 (function() {
 
-	var Array_sample = function(array) {
-		return array[Math.floor(Math.random() * array.length)];
+	var getRandomText = function() {
+		return chance
+			.n(function() {
+				return chance
+					.n(chance.word, chance.weighted([1, 2, 3], [2, 3, 1]))
+					.join(' ');
+			}, chance.weighted([1, 2, 3], [2, 3, 1]))
+			.join('\n');
 	};
 
-	var _randomText = (function() {
-		var adjectives = [
-			'able', 'bad', 'best', 'better', 'big', 'black', 'certain', 'clear', 'different', 'early',
-			'easy', 'economic', 'federal', 'free', 'full', 'good', 'great', 'hard', 'high', 'human',
-			'important', 'international', 'large', 'late', 'little', 'local', 'long', 'low', 'major', 'military',
-			'national', 'new', 'old', 'only', 'other', 'political', 'possible', 'public', 'real', 'recent',
-			'right', 'small', 'social', 'special', 'strong', 'sure', 'true', 'white', 'whole', 'young',
-		];
-
-		var nouns = [
-			'area', 'book', 'business', 'case', 'child', 'company', 'country', 'day', 'eye', 'fact',
-			'family', 'government', 'group', 'hand', 'home', 'job', 'life', 'lot', 'man', 'money',
-			'month', 'mother', 'Mr', 'night', 'number', 'part', 'people', 'place', 'point', 'problem',
-			'program', 'question', 'right', 'room', 'school', 'state', 'story', 'student', 'study', 'system',
-			'thing', 'time', 'water', 'way', 'week', 'woman', 'word', 'work', 'world', 'year',
-		];
-
-		return function() {
-			return Array
-				.from({length: (Math.random() < 1/6) ? 3 : (Math.random() < 1/4) ? 2 : 1}, function() {
-					return (Math.random() < 1/4) ? Array_sample((Math.random() < 1/2) ? nouns : adjectives) : Array_sample(adjectives) + ' ' + Array_sample(nouns);
-				})
-				.join('\n');
-		};
-	})();
-
-	var _randomFontFamily = (function() {
-		var fontFamilyValues = [
+	var getRandomFontFamily = function() {
+		return chance.pickone([
 			'Georgia, serif',
 			'"Palatino Linotype", "Book Antiqua", Palatino, serif',
 			'"Times New Roman", Times, serif',
@@ -47,20 +27,16 @@
 
 			'"Courier New", Courier, monospace',
 			'"Lucida Console", Monaco, monospace',
-		];
+		]);
+	};
 
-		return function() {
-			return Array_sample(fontFamilyValues);
-		};
-	})();
-
-	var _randomColor = function() {
-		return Math.random() * 0xffffff;
+	var getRandomColor = function() {
+		return chance.color({format: 'hex'});
 	};
 
 	var n = 1;
 
-	var _randomTextSize = function() {
+	var getRandomTextSize = function() {
 		return (1/64 + Math.random()) * n/4;
 	};
 
@@ -76,16 +52,16 @@
 	var redrawInterval = 1;
 	var autoRedraw = true;
 
-	var sprites = Array.from({length: 111}, function() {
+	var sprites = Array.from({length: 88}, function() {
 		var sprite = new THREE.TextSprite({
-			textSize: _randomTextSize(),
+			textSize: getRandomTextSize(),
 			redrawInterval: redrawInterval,
 			material: {
-				color: _randomColor(),
+				color: getRandomColor(),
 			},
 			texture: {
-				text: _randomText(),
-				fontFamily: _randomFontFamily(),
+				text: getRandomText(),
+				fontFamily: getRandomFontFamily(),
 				autoRedraw: autoRedraw,
 			},
 		});
@@ -107,8 +83,8 @@
 	controls.keyPanSpeed = 1/2;
 
 	var renderScene = function() {
-		renderer.setSize(document.body.clientWidth, document.body.clientHeight);
-		camera.aspect = renderer.domElement.clientWidth / renderer.domElement.clientHeight;
+		renderer.setSize(document.body.offsetWidth, document.body.offsetHeight);
+		camera.aspect = renderer.domElement.width / renderer.domElement.height;
 		camera.updateProjectionMatrix();
 		renderer.render(scene, camera);
 	};
@@ -129,14 +105,14 @@
 		guiFolder.add({
 			text: function() {
 				sprites.forEach(function(sprite) {
-					sprite.material.map.text = _randomText();
+					sprite.material.map.text = getRandomText();
 				});
 			},
 		}, 'text');
 		guiFolder.add({
 			fontFamily: function() {
 				sprites.forEach(function(sprite) {
-					sprite.material.map.fontFamily = _randomFontFamily();
+					sprite.material.map.fontFamily = getRandomFontFamily();
 				});
 			},
 		}, 'fontFamily');
@@ -159,7 +135,7 @@
 		guiFolder.add({
 			textSize: function() {
 				sprites.forEach(function(sprite) {
-					sprite.textSize = _randomTextSize();
+					sprite.textSize = getRandomTextSize();
 				});
 			},
 		}, 'textSize');

@@ -1,9 +1,7 @@
 import THREE from 'three';
 import 'three.texttexture';
 
-let onBeforeRender = function(renderer, scene, camera) {
-	this.redraw(renderer, camera);
-};
+import onBeforeRender from './onBeforeRender';
 
 THREE.TextSprite = class extends THREE.Sprite {
 	constructor({
@@ -13,7 +11,7 @@ THREE.TextSprite = class extends THREE.Sprite {
 		material = {},
 		texture = {},
 	} = {}) {
-		super(new THREE.SpriteMaterial(Object.assign({}, material, {map: new THREE.TextTexture(texture)})));
+		super(new THREE.SpriteMaterial({...material, map: new THREE.TextTexture(texture)}));
 		this.textSize = textSize;
 		this.redrawInterval = redrawInterval;
 		this.maxFontSize = maxFontSize;
@@ -38,7 +36,7 @@ THREE.TextSprite = class extends THREE.Sprite {
 	}
 
 	computeOptimalFontSize(renderer, camera) {
-		if (renderer.domElement.width && renderer.domElement.height && this.material.map.linesCount) {
+		if (renderer.domElement.width && renderer.domElement.height && this.material.map.lines.length) {
 			let distance = this.getWorldPosition().distanceTo(camera.getWorldPosition());
 			if (distance) {
 				let heightInPixels = this.getWorldScale().y * renderer.domElement.height / distance;
