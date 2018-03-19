@@ -1,6 +1,8 @@
 import THREE from 'three';
 import 'three.texttexture';
 
+import getOptimalFontSize from './getOptimalFontSize';
+
 THREE.TextSprite = class extends THREE.Sprite {
 	constructor({
 		textSize = 1,
@@ -33,19 +35,6 @@ THREE.TextSprite = class extends THREE.Sprite {
 		return super.updateMatrix(...args);
 	}
 
-	computeOptimalFontSize(renderer, camera) {
-		if (renderer.domElement.width && renderer.domElement.height && this.material.map.lines.length) {
-			let distance = this.getWorldPosition(new THREE.Vector3()).distanceTo(camera.getWorldPosition(new THREE.Vector3()));
-			if (distance) {
-				let heightInPixels = this.getWorldScale(new THREE.Vector3()).y * renderer.domElement.height / distance;
-				if (heightInPixels) {
-					return Math.round(heightInPixels / this.material.map.paddingBoxHeight);
-				}
-			}
-		}
-		return 0;
-	}
-
 	redraw(renderer, camera) {
 		if (this.lastRedraw + this.redrawInterval < Date.now()) {
 			if (this.redrawInterval) {
@@ -60,10 +49,7 @@ THREE.TextSprite = class extends THREE.Sprite {
 
 	redrawNow(renderer, camera) {
 		this.updateScale();
-		let fontSize = this.computeOptimalFontSize(renderer, camera);
-		fontSize = THREE.Math.ceilPowerOfTwo(fontSize);
-		fontSize = Math.min(fontSize, this.maxFontSize);
-		this.material.map.fontSize = fontSize;
+		this.material.map.fontSize = Math.min(THREE.Math.ceilPowerOfTwo(getOptimalFontSize(this, renderer, camera)), this.maxFontSize);
 		if (!this.material.map.autoRedraw) {
 			this.material.map.redraw();
 		}
