@@ -35,7 +35,7 @@
 	"homepage": "https://github.com/SeregPie/THREE.TextSprite#readme",
 	"dependencies": {
 		"three": "^0.91.0",
-		"three.texttexture": "^18.3.3"
+		"three.texttexture": "^18.3.19"
 	},
 	"devDependencies": {
 		"rollup": "^0.57.1",

@@ -21,6 +21,12 @@ An instance of `TextSprite` automatically computes the optimal font size dependi
 npm install three.textsprite
 ```
 
+### ES module
+
+```javascript
+import TextSprite from 'three.textsprite';
+```
+
 ### browser
 
 ```html
@@ -28,6 +34,8 @@ npm install three.textsprite
 <script src="https://unpkg.com/three.texttexture"></script>
 <script src="https://unpkg.com/three.textsprite"></script>
 ```
+
+The class `TextSprite` will be available under the namespace `THREE`.
 
 ## members
 
