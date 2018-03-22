@@ -66,10 +66,12 @@
 			},
 		});
 		sprite.position
-			.set(Math.random(), Math.random(), Math.random())
+			.setX(Math.random())
+			.setY(Math.random())
+			.setZ(Math.random())
 			.subScalar(1/2)
 			.setLength(1 + Math.random())
-			.multiplyScalar(2*n);
+			.multiplyScalar(3*n);
 		scene.add(sprite);
 		return sprite;
 	});
@@ -86,6 +88,7 @@
 		renderer.setSize(document.body.offsetWidth, document.body.offsetHeight);
 		camera.aspect = renderer.domElement.width / renderer.domElement.height;
 		camera.updateProjectionMatrix();
+		controls.update();
 		renderer.render(scene, camera);
 	};
 
