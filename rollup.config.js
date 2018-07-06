@@ -1,7 +1,8 @@
+import {uglify} from 'rollup-plugin-uglify';
 import buble from 'rollup-plugin-buble';
-import uglify from 'rollup-plugin-uglify';
+import path from 'path';
 
-import pkg from './package.json';
+import {main} from './package.json';
 
 let globals = {
 	'three': 'THREE',
@@ -12,15 +13,13 @@ export default {
 	input: 'src/index.js',
 	external: Object.keys(globals),
 	output: {
-		file: pkg.main,
+		file: main,
 		format: 'umd',
-		name: 'THREE.TextSprite',
+		name: path.basename(main, path.extname(main)),
 		globals,
 	},
 	plugins: [
-		buble({
-			objectAssign: 'Object.assign',
-		}),
+		buble({objectAssign: 'Object.assign'}),
 		uglify(),
 	],
 };

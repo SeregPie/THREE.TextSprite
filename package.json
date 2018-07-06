@@ -29,17 +29,13 @@
 	],
 	"author": "Sergej Sintschilin",
 	"license": "MIT",
-	"bugs": {
-		"url": "https://github.com/SeregPie/THREE.TextSprite/issues"
-	},
-	"homepage": "https://github.com/SeregPie/THREE.TextSprite#readme",
 	"dependencies": {
-		"three": "^0.91.0",
+		"three": "^0.94.0",
 		"three.texttexture": "^18.3.19"
 	},
 	"devDependencies": {
-		"rollup": "^0.57.1",
+		"rollup": "^0.62.0",
 		"rollup-plugin-buble": "^0.19.2",
-		"rollup-plugin-uglify": "^3.0.0"
+		"rollup-plugin-uglify": "^4.0.0"
 	}
 }

@@ -34,10 +34,8 @@
 		return chance.color({format: 'hex'});
 	};
 
-	var n = 1;
-
 	var getRandomTextSize = function() {
-		return (1/64 + Math.random()) * n/4;
+		return (1/64 + Math.random()) * 1/4;
 	};
 
 	var renderer = new THREE.WebGLRenderer({antialias: true});
@@ -46,8 +44,8 @@
 
 	var scene = new THREE.Scene();
 
-	var camera = new THREE.PerspectiveCamera(75, 1, n/128, 128*n);
-	camera.position.set(0, 0, 8*n);
+	var camera = new THREE.PerspectiveCamera(75, 1, 1/128, 128);
+	camera.position.set(0, 0, 8);
 
 	var redrawInterval = 1;
 	var autoRedraw = true;
@@ -71,7 +69,7 @@
 			.setZ(Math.random())
 			.subScalar(1/2)
 			.setLength(1 + Math.random())
-			.multiplyScalar(3*n);
+			.multiplyScalar(3);
 		scene.add(sprite);
 		return sprite;
 	});
@@ -94,13 +92,13 @@
 
 	window.addEventListener('resize', renderScene, false);
 
-	var startToRenderScene = function() {
-		setTimeout(function() {
-			requestAnimationFrame(startToRenderScene);
-		}, 1000/60);
+	var startSceneRenderer = function() {
+		requestAnimationFrame(function() {
+			setTimeout(startSceneRenderer, 1000/60);
+		});
 		renderScene();
 	};
-	startToRenderScene();
+	startSceneRenderer();
 
 	var gui = new dat.GUI();
 	(function() {
@@ -123,7 +121,6 @@
 			get: function() {
 				return autoRedraw;
 			},
-
 			set: function(value) {
 				autoRedraw = value;
 				sprites.forEach(function(sprite) {
@@ -146,7 +143,6 @@
 			get: function() {
 				return redrawInterval;
 			},
-
 			set: function(value) {
 				redrawInterval = value;
 				sprites.forEach(function(sprite) {
