@@ -31,7 +31,7 @@ export default class extends Sprite {
 	}
 
 	updateScale() {
-		this.scale.set(this.material.map.aspect, 1, 1).multiplyScalar(this.textSize * this.material.map.paddingBoxHeight);
+		this.scale.set(this.material.map.imageAspect, 1, 1).multiplyScalar(this.textSize * this.material.map.imageHeight);
 	}
 
 	updateMatrix(...args) {
