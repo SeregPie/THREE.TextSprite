@@ -53,10 +53,8 @@ export default class extends Sprite {
 
 	redrawNow(renderer, camera) {
 		this.updateScale();
+		this.material.map.autoRedraw = true;
 		this.material.map.fontSize = Math.min(THREE_Math.ceilPowerOfTwo(getOptimalFontSize(this, renderer, camera)), this.maxFontSize);
-		if (!this.material.map.autoRedraw) {
-			this.material.map.redraw();
-		}
 		this.lastRedraw = Date.now();
 	}
 

@@ -39,6 +39,7 @@
 	};
 
 	var renderer = new THREE.WebGLRenderer({antialias: true});
+	renderer.setPixelRatio(devicePixelRatio);
 	renderer.setClearColor(0x000000);
 	document.body.appendChild(renderer.domElement);
 
@@ -48,7 +49,6 @@
 	camera.position.set(0, 0, 8);
 
 	var redrawInterval = 1;
-	var autoRedraw = true;
 
 	var sprites = Array.from({length: 88}, function() {
 		var sprite = new THREE.TextSprite({
@@ -60,7 +60,6 @@
 			texture: {
 				text: getRandomText(),
 				fontFamily: getRandomFontFamily(),
-				autoRedraw: autoRedraw,
 			},
 		});
 		sprite.position
@@ -117,17 +116,6 @@
 				});
 			},
 		}, 'fontFamily');
-		guiFolder.add(Object.defineProperty({}, 'autoRedraw', {
-			get: function() {
-				return autoRedraw;
-			},
-			set: function(value) {
-				autoRedraw = value;
-				sprites.forEach(function(sprite) {
-					sprite.material.map.autoRedraw = autoRedraw;
-				});
-			},
-		}), 'autoRedraw');
 		guiFolder.open();
 	})();
 	(function() {
