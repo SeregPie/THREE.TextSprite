@@ -8,10 +8,7 @@
 		"dev": "rollup -c -w",
 		"prepublishOnly": "npm run build"
 	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/SeregPie/THREE.TextSprite.git"
-	},
+	"repository": "https://github.com/SeregPie/THREE.TextSprite.git",
 	"keywords": [
 		"3d",
 		"canvas",
@@ -27,7 +24,7 @@
 		"texture",
 		"three"
 	],
-	"author": "Sergej Sintschilin",
+	"author": "Sergej Sintschilin <seregpie@gmail.com>",
 	"license": "MIT",
 	"dependencies": {
 		"three": "^0.95.0",
