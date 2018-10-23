@@ -14,12 +14,14 @@ export default class extends Sprite {
 		maxFontSize = Infinity,
 		material = {},
 		texture = {},
+		minFontSize = 6,
 	} = {}) {
 		super(new SpriteMaterial({...material, map: new TextTexture(texture)}));
 		this.textSize = textSize;
 		this.redrawInterval = redrawInterval;
 		this.maxFontSize = maxFontSize;
 		this.lastRedraw = 0;
+		this.minFontSize = minFontSize;
 	}
 
 	get isTextSprite() {
@@ -54,7 +56,8 @@ export default class extends Sprite {
 	redrawNow(renderer, camera) {
 		this.updateScale();
 		this.material.map.autoRedraw = true;
-		this.material.map.fontSize = Math.min(THREE_Math.ceilPowerOfTwo(getOptimalFontSize(this, renderer, camera)), this.maxFontSize);
+		var fontSize = THREE_Math.ceilPowerOfTwo(getOptimalFontSize(this, renderer, camera));
+		this.material.map.fontSize = Math.max(this.minFontSize, Math.min(fontSize, this.maxFontSize));
 		this.lastRedraw = Date.now();
 	}
 
