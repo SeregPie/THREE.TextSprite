@@ -2,13 +2,6 @@
 	"name": "three.textsprite",
 	"version": "18.8.6",
 	"description": "Automatically computes the optimal font size depending on the distance to the camera and the size of the renderer canvas.",
-	"main": "THREE.TextSprite.js",
-	"scripts": {
-		"build": "rollup -c",
-		"dev": "rollup -c -w",
-		"prepublishOnly": "npm run build"
-	},
-	"repository": "https://github.com/SeregPie/THREE.TextSprite.git",
 	"keywords": [
 		"3d",
 		"canvas",
@@ -24,8 +17,15 @@
 		"texture",
 		"three"
 	],
-	"author": "Sergej Sintschilin <seregpie@gmail.com>",
 	"license": "MIT",
+	"author": "Sergej Sintschilin <seregpie@gmail.com>",
+	"main": "THREE.TextSprite.js",
+	"repository": "https://github.com/SeregPie/THREE.TextSprite.git",
+	"scripts": {
+		"build": "rollup -c",
+		"dev": "rollup -c -w",
+		"prepublishOnly": "npm run build"
+	},
 	"dependencies": {
 		"three": "^0.95.0",
 		"three.texttexture": "^18.8.6"
