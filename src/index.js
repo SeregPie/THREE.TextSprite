@@ -11,17 +11,17 @@ export default class extends Sprite {
 	constructor({
 		textSize = 1,
 		redrawInterval = 1,
+		minFontSize = 0,
 		maxFontSize = Infinity,
 		material = {},
 		texture = {},
-		minFontSize = 6,
 	} = {}) {
 		super(new SpriteMaterial({...material, map: new TextTexture(texture)}));
 		this.textSize = textSize;
 		this.redrawInterval = redrawInterval;
+		this.minFontSize = minFontSize;
 		this.maxFontSize = maxFontSize;
 		this.lastRedraw = 0;
-		this.minFontSize = minFontSize;
 	}
 
 	get isTextSprite() {
@@ -56,8 +56,7 @@ export default class extends Sprite {
 	redrawNow(renderer, camera) {
 		this.updateScale();
 		this.material.map.autoRedraw = true;
-		var fontSize = THREE_Math.ceilPowerOfTwo(getOptimalFontSize(this, renderer, camera));
-		this.material.map.fontSize = Math.max(this.minFontSize, Math.min(fontSize, this.maxFontSize));
+		this.material.map.fontSize = THREE_Math.clamp(THREE_Math.ceilPowerOfTwo(getOptimalFontSize(this, renderer, camera)), this.minFontSize, this.maxFontSize);
 		this.lastRedraw = Date.now();
 	}
 

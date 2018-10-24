@@ -84,6 +84,12 @@ The minimum time that must elapse before the canvas is redrawn. If 0, the canvas
 
 ---
 
+`.minFontSize = 0`
+
+The minimum font size.
+
+---
+
 `.maxFontSize = Infinity`
 
 The maximum font size.
