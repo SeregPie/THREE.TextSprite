@@ -16,7 +16,10 @@ export default class extends Sprite {
 		material = {},
 		texture = {},
 	} = {}) {
-		super(new SpriteMaterial({...material, map: new TextTexture(texture)}));
+		super(new SpriteMaterial({
+			...material,
+			map: new TextTexture(texture),
+		}));
 		this.textSize = textSize;
 		this.redrawInterval = redrawInterval;
 		this.minFontSize = minFontSize;
@@ -33,7 +36,9 @@ export default class extends Sprite {
 	}
 
 	updateScale() {
-		this.scale.set(this.material.map.imageAspect, 1, 1).multiplyScalar(this.textSize * this.material.map.imageHeight);
+		this.scale
+			.set(this.material.map.imageAspect, 1, 1)
+			.multiplyScalar(this.textSize * this.material.map.imageHeight);
 	}
 
 	updateMatrix(...args) {
@@ -56,7 +61,13 @@ export default class extends Sprite {
 	redrawNow(renderer, camera) {
 		this.updateScale();
 		this.material.map.autoRedraw = true;
-		this.material.map.fontSize = THREE_Math.clamp(THREE_Math.ceilPowerOfTwo(getOptimalFontSize(this, renderer, camera)), this.minFontSize, this.maxFontSize);
+		this.material.map.fontSize = THREE_Math.clamp(
+			THREE_Math.ceilPowerOfTwo(
+				getOptimalFontSize(this, renderer, camera)
+			),
+			this.minFontSize,
+			this.maxFontSize,
+		);
 		this.lastRedraw = Date.now();
 	}
 
