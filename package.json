@@ -1,6 +1,6 @@
 {
 	"name": "three.textsprite",
-	"version": "18.8.6",
+	"version": "18.10.24",
 	"description": "Automatically computes the optimal font size depending on the distance to the camera and the size of the renderer canvas.",
 	"keywords": [
 		"3d",
