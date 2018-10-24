@@ -9,13 +9,11 @@
 			}, chance.weighted([1, 2, 3], [2, 3, 1]))
 			.join('\n');
 	};
-
 	var getRandomFontFamily = function() {
 		return chance.pickone([
 			'Georgia, serif',
 			'"Palatino Linotype", "Book Antiqua", Palatino, serif',
 			'"Times New Roman", Times, serif',
-
 			'Arial, Helvetica, sans-serif',
 			'"Arial Black", Gadget, sans-serif',
 			'"Comic Sans MS", cursive, sans-serif',
@@ -24,32 +22,24 @@
 			'Tahoma, Geneva, sans-serif',
 			'"Trebuchet MS", Helvetica, sans-serif',
 			'Verdana, Geneva, sans-serif',
-
 			'"Courier New", Courier, monospace',
 			'"Lucida Console", Monaco, monospace',
 		]);
 	};
-
 	var getRandomColor = function() {
 		return chance.color({format: 'hex'});
 	};
-
 	var getRandomTextSize = function() {
 		return (1/64 + Math.random()) * 1/4;
 	};
-
 	var renderer = new THREE.WebGLRenderer({antialias: true});
 	renderer.setPixelRatio(devicePixelRatio);
 	renderer.setClearColor(0x000000);
 	document.body.appendChild(renderer.domElement);
-
 	var scene = new THREE.Scene();
-
 	var camera = new THREE.PerspectiveCamera(75, 1, 1/128, 128);
 	camera.position.set(0, 0, 8);
-
 	var redrawInterval = 1;
-
 	var sprites = Array.from({length: 88}, function() {
 		var sprite = new THREE.TextSprite({
 			textSize: getRandomTextSize(),
@@ -72,7 +62,6 @@
 		scene.add(sprite);
 		return sprite;
 	});
-
 	var controls = new THREE.OrbitControls(camera, renderer.domElement);
 	controls.maxDistance = camera.far/2;
 	controls.enableDamping = true;
@@ -80,7 +69,6 @@
 	controls.rotateSpeed = 1/4;
 	controls.zoomSpeed = 1;
 	controls.keyPanSpeed = 1/2;
-
 	var renderScene = function() {
 		renderer.setSize(document.body.offsetWidth, document.body.offsetHeight);
 		camera.aspect = renderer.domElement.width / renderer.domElement.height;
@@ -88,9 +76,7 @@
 		controls.update();
 		renderer.render(scene, camera);
 	};
-
 	window.addEventListener('resize', renderScene, false);
-
 	var startSceneRenderer = function() {
 		requestAnimationFrame(function() {
 			setTimeout(startSceneRenderer, 1000/60);
@@ -98,7 +84,6 @@
 		renderScene();
 	};
 	startSceneRenderer();
-
 	var gui = new dat.GUI();
 	(function() {
 		var guiFolder = gui.addFolder('texture');
