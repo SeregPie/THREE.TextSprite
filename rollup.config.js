@@ -1,5 +1,5 @@
-import {uglify} from 'rollup-plugin-uglify';
 import buble from 'rollup-plugin-buble';
+import minify from 'rollup-plugin-babel-minify';
 import path from 'path';
 
 import {main} from './package.json';
@@ -20,6 +20,6 @@ export default {
 	},
 	plugins: [
 		buble({objectAssign: 'Object.assign'}),
-		uglify(),
+		minify({comments: false}),
 	],
 };
