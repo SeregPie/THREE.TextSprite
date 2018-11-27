@@ -10,7 +10,6 @@ An instance of `TextSprite` automatically computes the optimal font size dependi
 
 ## dependencies
 
-- [THREE](https://github.com/mrdoob/three.js)
 - [THREE.TextTexture](https://github.com/SeregPie/THREE.TextTexture)
 
 ## setup
@@ -39,25 +38,32 @@ The class `TextSprite` will be available under the namespace `THREE`.
 
 ## members
 
-`.constructor({textSize, redrawInterval, maxFontSize, texture, material})`
+`.constructor({
+  material,
+  maxFontSize,
+  minFontSize,
+  redrawInterval,
+  textSize,
+  texture,
+})`
 
 | argument | description |
 | ---: | :--- |
-| `texture` | The parameters to pass to the constructor of [`TextTexture`](https://github.com/SeregPie/THREE.TextTexture). |
 | `material` | The parameters to pass to the constructor of [`SpriteMaterial`](https://threejs.org/docs/index.html#api/materials/SpriteMaterial). |
+| `texture` | The parameters to pass to the constructor of [`TextTexture`](https://github.com/SeregPie/THREE.TextTexture). |
 
 ```javascript
 let sprite = new THREE.TextSprite({
-  textSize: 10,
-  redrawInterval: 250,
-  texture: {
-    text: 'Carpe Diem',
-    fontFamily: 'Arial, Helvetica, sans-serif',
-  },
   material: {
     color: 0xffbbff,
     fog: true,
   },
+  redrawInterval: 250,
+  textSize: 10,
+  texture: {
+    text: 'Carpe Diem',
+    fontFamily: 'Arial, Helvetica, sans-serif',
+  },  
 });
 scene.add(sprite);
 ```
