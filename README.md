@@ -38,14 +38,16 @@ The class `TextSprite` will be available under the namespace `THREE`.
 
 ## members
 
-`.constructor({
+```
+.constructor({
   material,
   maxFontSize,
   minFontSize,
   redrawInterval,
   textSize,
   texture,
-})`
+})
+```
 
 | argument | description |
 | ---: | :--- |
