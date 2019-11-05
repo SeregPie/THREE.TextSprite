@@ -1,41 +1,44 @@
-import {
-	Math,
-	Sprite,
-	SpriteMaterial,
-} from 'three';
-import TextTexture from '@seregpie/three.text-texture';
+import * as THREE from 'three';
+import THREE_TextTexture from '@seregpie/three.text-texture';
 
-import _updateScale from './classPrototypeMembers/updateScale';
-
-export default class extends Sprite {
+export default class extends THREE.Sprite {
 	constructor({
 		fontSize = 1,
 		...textureOptions
 	} = {}) {
-		super(new SpriteMaterial({
+		let texture = new THREE_TextTexture({
+			...textureOptions,
+			fontSize: 0,
+		});
+		let material = new THREE.SpriteMaterial({
 			depthWrite: false,
-			map: new TextTexture({
-				...textureOptions,
-				fontSize: 0,
-			}),
-		}));
+			map: texture,
+		});
+		super(material);
 		Object.assign(this, {
 			fontSize,
-			updateScale: _updateScale,
 		});
 	}
 
-	onBeforeRender(renderer, scene, camera) {
-		let {material} = this;
+	get width() {
+		let {
+			fontSize,
+			material,
+		} = this;
 		let {map} = material;
-		map.fontSize = Math.ceilPowerOfTwo(map.computeOptimalFontSize(this, renderer, camera));
-		this.updateScale();
+		let {width} = map;
+		width *= fontSize;
+		return width;
 	}
 
-	dispose() {
-		let {material} = this;
+	get height() {
+		let {
+			fontSize,
+			material,
+		} = this;
 		let {map} = material;
-		map.dispose();
-		material.dispose();
+		let {height} = map;
+		height *= fontSize;
+		return height;
 	}
 }

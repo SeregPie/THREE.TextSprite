@@ -22,7 +22,6 @@ let {prototype} = Class;
 		},
 		set(value) {
 			this.material.map[property] = value;
-			this.updateScale();
 		},
 	});
 });

@@ -75,7 +75,6 @@ sprite.text = [
 ```
 new THREE.TextSprite({
   align: 'center',
-  createCanvas() { /*...*/ },
   fillStyle: '#fff',
   fontFamily: 'sans-serif',
   fontSize: 1,
@@ -83,7 +82,6 @@ new THREE.TextSprite({
   fontVariant: 'normal',
   fontWeight: 'normal',
   lineGap: 0.15,
-  loadFontFace(family, style, variant, weight) { /*...*/ },
   padding: 0.25,
   strokeStyle: '#000',
   strokeWidth: 0,
@@ -94,7 +92,6 @@ new THREE.TextSprite({
 | argument | description |
 | ---: | :--- |
 | `align` | The horizontal text alignment. Possible values are `'center'`, `'left'` and `'right'`. |
-| `createCanvas` | A function to create a new `Canvas` instance. |
 | `fillStyle` | The fill color or style. |
 | `fontFamily` | The font family. |
 | `fontSize` | The font size. |
@@ -102,21 +99,10 @@ new THREE.TextSprite({
 | `fontVariant` | The font variant. |
 | `fontWeight` | The font weight. |
 | `lineGap` | The vertical distance between the text lines. The value is relative to the font size. |
-| `loadFontFace` | A function to load a font face. |
 | `padding` | The space around the text. The value is relative to the font size. |
 | `strokeStyle` | The stroke color or style. |
 | `strokeWidth` | The stroke width. The value is relative to the font size. |
 | `text` | The text. |
-
----
-
-Provide a custom `loadFontFace` function to support the older browsers.
-
-```javascript
-loadFontFace(family, style, variant, weight) {
-  return (new FontFaceObserver(family, {style, weight})).load();
-}
-```
 
 ### properties
 
@@ -149,10 +135,6 @@ Used to check whether this is an instance of `TextSprite`.
 `.lineGap`
 
 `.padding`
-
-`.createCanvas`
-
-`.loadFontFace`
 
 ### methods
 
