@@ -1,31 +1,76 @@
-import Class from './Class';
-import classPrototypeMembers from './classPrototypeMembers';
+import {
+	Sprite,
+	SpriteMaterial,
+} from 'three';
+import TextTexture from '@seregpie/three.text-texture';
 
-let {prototype} = Class;
+let Class = class extends Sprite {
+	constructor(options) {
+		let map = new TextTexture(options);
+		let material = new SpriteMaterial({
+			depthWrite: false,
+			map,
+		});
+		super(material);
+	}
+
+	onBeforeRender(renderer, scene, camera) {
+		let {
+			material,
+			scale,
+		} = this;
+		let {map} = material;
+		map.loadFontFace();
+		if (map.ready) {
+			map.setOptimalPixelRatio(this, renderer, camera);
+			map.redraw();
+			let {
+				height,
+				width,
+			} = map;
+			if (width && height) {
+				scale.setX(width).setY(height);
+			} else {
+				scale.setX(1).setY(1);
+			}
+		}
+	}
+
+	dispose() {
+		let {material} = this;
+		let {map} = material;
+		map.dispose();
+		material.dispose();
+	}
+};
 
 [
-	'align',
-	'fillStyle',
+	'alignment',
+	'color',
 	'fontFamily',
 	'fontStyle',
 	'fontVariant',
 	'fontWeight',
 	'lineGap',
 	'padding',
-	'strokeStyle',
+	'strokeColor',
 	'strokeWidth',
 	'text',
-].forEach(property => {
-	Object.defineProperty(prototype, property, {
+
+	'align',
+	'fillStyle',
+	'strokeStyle',
+].forEach(key => {
+	Object.defineProperty(Class.prototype, key, {
 		get() {
-			return this.material.map[property];
+			return this.material.map[key];
 		},
 		set(value) {
-			this.material.map[property] = value;
+			this.material.map[key] = value;
 		},
 	});
 });
 
-Object.assign(prototype, classPrototypeMembers);
+Class.prototype.isTextSprite = true;
 
 export default Class;
