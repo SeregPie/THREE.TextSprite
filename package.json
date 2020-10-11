@@ -1,6 +1,6 @@
 {
 	"name": "@seregpie/three.text-sprite",
-	"version": "2.0.0",
+	"version": "3.0.0",
 	"description": "Optimally displays the text as a sprite.",
 	"keywords": [
 		"sprite",
@@ -17,7 +17,7 @@
 		"prepublishOnly": "npm run build"
 	},
 	"dependencies": {
-		"@seregpie/three.text-texture": "^2.0.1"
+		"@seregpie/three.text-texture": "^3.0.0"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.11.6",
