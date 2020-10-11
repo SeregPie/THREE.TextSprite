@@ -1,6 +1,5 @@
 import {terser} from 'rollup-plugin-terser';
-import buble from 'rollup-plugin-buble';
-import resolve from 'rollup-plugin-node-resolve';
+import babel from '@rollup/plugin-babel';
 
 import {main} from './package.json';
 
@@ -13,8 +12,12 @@ export default {
 	external: Object.keys(globals),
 	input: 'src/index.js',
 	plugins: [
-		resolve(),
-		buble({objectAssign: true}),
+		babel({
+			babelHelpers: 'bundled',
+			presets: [['@babel/preset-env', {
+				targets: ['defaults', 'not IE 11'],
+			}]],
+		}),
 		terser(),
 	],
 	output: {

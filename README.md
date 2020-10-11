@@ -2,7 +2,7 @@
 
 `class THREE.TextSprite extends THREE.Sprite`
 
-An instance of `TextSprite` automatically computes the optimal font size depending on the distance to the camera and the size of the renderer DOM element.
+Optimally displays the text as a sprite.
 
 ## demo
 
@@ -20,7 +20,7 @@ An instance of `TextSprite` automatically computes the optimal font size dependi
 npm i @seregpie/three.text-sprite
 ```
 
-### ES module
+---
 
 ```javascript
 import TextSprite from '@seregpie/three.text-sprite';
@@ -40,9 +40,10 @@ The class is globally available as `THREE.TextSprite`.
 
 ```javascript
 let sprite = new THREE.TextSprite({
-  fillStyle: '#24ff00',
+  alignment: 'left',
+  color: '#24ff00',
   fontFamily: '"Times New Roman", Times, serif',
-  fontSize: 10,
+  fontSize: 8,
   fontStyle: 'italic',
   text: [
     'Twinkle, twinkle, little star,',
@@ -60,6 +61,7 @@ Update the sprite.
 
 ```javascript
 sprite.fontFamily = 'Arial, Helvetica, sans-serif';
+sprite.fontStyle = 'normal';
 sprite.text = [
   'When this blazing sun is gone,',
   'When he nothing shines upon,',
@@ -74,16 +76,16 @@ sprite.text = [
 
 ```
 new THREE.TextSprite({
-  align: 'center',
-  fillStyle: '#fff',
+  alignment: 'center',
+  color: '#fff',
   fontFamily: 'sans-serif',
   fontSize: 1,
   fontStyle: 'normal',
   fontVariant: 'normal',
   fontWeight: 'normal',
-  lineGap: 0.15,
-  padding: 0.25,
-  strokeStyle: '#000',
+  lineGap: 0.25,
+  padding: 0.5,
+  strokeColor: '#fff',
   strokeWidth: 0,
   text: '',
 })
@@ -91,8 +93,8 @@ new THREE.TextSprite({
 
 | argument | description |
 | ---: | :--- |
-| `align` | The horizontal text alignment. Possible values are `'center'`, `'left'` and `'right'`. |
-| `fillStyle` | The fill color or style. |
+| `alignment` | The horizontal text alignment. Possible values are `'center'`, `'left'` and `'right'`. |
+| `color` | The color. |
 | `fontFamily` | The font family. |
 | `fontSize` | The font size. |
 | `fontStyle` | The font style. |
@@ -100,7 +102,7 @@ new THREE.TextSprite({
 | `fontWeight` | The font weight. |
 | `lineGap` | The vertical distance between the text lines. The value is relative to the font size. |
 | `padding` | The space around the text. The value is relative to the font size. |
-| `strokeStyle` | The stroke color or style. |
+| `strokeColor` | The stroke color. |
 | `strokeWidth` | The stroke width. The value is relative to the font size. |
 | `text` | The text. |
 
@@ -124,13 +126,13 @@ Used to check whether this is an instance of `TextSprite`.
 
 `.fontStyle`
 
-`.fillStyle`
+`.color`
 
 `.strokeWidth`
 
-`.strokeStyle`
+`.strokeColor`
 
-`.align`
+`.alignment`
 
 `.lineGap`
 
