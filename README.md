@@ -61,6 +61,7 @@ Update the sprite.
 
 ```javascript
 sprite.fontFamily = 'Arial, Helvetica, sans-serif';
+sprite.fontStyle = 'normal';
 sprite.text = [
   'When this blazing sun is gone,',
   'When he nothing shines upon,',
@@ -84,7 +85,7 @@ new THREE.TextSprite({
   fontWeight: 'normal',
   lineGap: 0.25,
   padding: 0.5,
-  strokeColor: '#000',
+  strokeColor: '#fff',
   strokeWidth: 0,
   text: '',
 })

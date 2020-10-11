@@ -6,41 +6,24 @@ import TextTexture from '@seregpie/three.text-texture';
 
 let Class = class extends Sprite {
 	constructor(options) {
-		let map = new TextTexture(options);
+		let texture = new TextTexture(options);
 		let material = new SpriteMaterial({
 			depthWrite: false,
-			map,
+			map: texture,
 		});
 		super(material);
 	}
 
 	onBeforeRender(renderer, scene, camera) {
-		let {
-			material,
-			scale,
-		} = this;
-		let {map} = material;
-		map.loadFontFace();
-		if (map.ready) {
-			map.setOptimalPixelRatio(this, renderer, camera);
-			map.redraw();
-			let {
-				height,
-				width,
-			} = map;
-			if (width && height) {
-				scale.setX(width).setY(height);
-			} else {
-				scale.setX(1).setY(1);
-			}
-		}
+		let texture = this.material.map;
+		texture.setOptimalPixelRatio(this, renderer, camera);
+		texture.redraw();
+		this.scale.setX(texture.width).setY(texture.height);
 	}
 
 	dispose() {
-		let {material} = this;
-		let {map} = material;
-		map.dispose();
-		material.dispose();
+		this.material.map.dispose();
+		this.material.dispose();
 	}
 };
 
