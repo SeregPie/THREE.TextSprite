@@ -15,15 +15,29 @@ let Class = class extends Sprite {
 	}
 
 	onBeforeRender(renderer, scene, camera) {
-		let texture = this.material.map;
+		let {
+			material,
+			scale,
+		} = this;
+		let {map: texture} = material;
+		let {
+			height,
+			width,
+		} = texture;
+		if (width && height) {
+			scale.setX(width).setY(height);
+		} else {
+			scale.setScalar(1);
+		}
 		texture.setOptimalPixelRatio(this, renderer, camera);
 		texture.redraw();
-		this.scale.setX(texture.width).setY(texture.height);
 	}
 
 	dispose() {
-		this.material.map.dispose();
-		this.material.dispose();
+		let {material} = this;
+		let {map: texture} = material;
+		texture.dispose();
+		material.dispose();
 	}
 };
 
@@ -31,6 +45,7 @@ let Class = class extends Sprite {
 	'alignment',
 	'color',
 	'fontFamily',
+	'fontSize',
 	'fontStyle',
 	'fontVariant',
 	'fontWeight',
@@ -39,10 +54,6 @@ let Class = class extends Sprite {
 	'strokeColor',
 	'strokeWidth',
 	'text',
-
-	'align',
-	'fillStyle',
-	'strokeStyle',
 ].forEach(key => {
 	Object.defineProperty(Class.prototype, key, {
 		get() {
