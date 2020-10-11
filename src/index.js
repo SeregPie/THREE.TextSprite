@@ -15,22 +15,24 @@ let Class = class extends Sprite {
 	}
 
 	onBeforeRender(renderer, scene, camera) {
-		let {
-			material,
-			scale,
-		} = this;
+		let {material} = this;
 		let {map: texture} = material;
-		let {
-			height,
-			width,
-		} = texture;
-		if (width && height) {
-			scale.setX(width).setY(height);
+		if (texture.checkFontFace()) {
+			let {scale} = this;
+			let {
+				height,
+				width,
+			} = texture;
+			if (width && height) {
+				scale.setX(width).setY(height);
+				texture.setOptimalPixelRatio(this, renderer, camera);
+				texture.redraw();
+			} else {
+				scale.setScalar(1);
+			}
 		} else {
-			scale.setScalar(1);
+			texture.loadFontFace();
 		}
-		texture.setOptimalPixelRatio(this, renderer, camera);
-		texture.redraw();
 	}
 
 	dispose() {
