@@ -88,7 +88,7 @@ new THREE.TextSprite({
   strokeColor: '#fff',
   strokeWidth: 0,
   text: '',
-})
+}, material)
 ```
 
 | argument | description |
@@ -105,6 +105,7 @@ new THREE.TextSprite({
 | `strokeColor` | The stroke color. |
 | `strokeWidth` | The stroke width. The value is relative to the font size. |
 | `text` | The text. |
+| `material` | An instance of `THREE.Material`. If not provided, a default instance will be created. |
 
 ### properties
 

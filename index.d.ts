@@ -1,4 +1,7 @@
-import {Sprite} from 'three';
+import {
+	Material,
+	Sprite,
+} from 'three';
 
 export default class TextSprite extends Sprite {
 	constructor(options?: {
@@ -14,7 +17,7 @@ export default class TextSprite extends Sprite {
 		strokeColor?: string;
 		strokeWidth?: number;
 		text?: string;
-	});
+	}, material?: Material);
 
 	readonly isTextSprite: true;
 
@@ -43,4 +46,4 @@ export default class TextSprite extends Sprite {
 	padding: number;
 
 	dispose(): void;
-};
+}

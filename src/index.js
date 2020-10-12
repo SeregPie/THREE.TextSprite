@@ -5,19 +5,21 @@ import {
 import TextTexture from '@seregpie/three.text-texture';
 
 let Class = class extends Sprite {
-	constructor({
-		fontSize = 1,
-		...options
-	} = {}) {
+	constructor(
+		{
+			fontSize = 1,
+			...options
+		} = {},
+		material = new SpriteMaterial({
+			depthWrite: false,
+		}),
+	) {
+		super(material);
 		let texture = new TextTexture({
 			fontSize,
 			...options,
 		});
-		let material = new SpriteMaterial({
-			depthWrite: false,
-			map: texture,
-		});
-		super(material);
+		this.material.map = texture;
 	}
 
 	onBeforeRender(renderer, scene, camera) {
