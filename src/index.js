@@ -11,7 +11,7 @@ let Class = class extends Sprite {
 	} = {}) {
 		let texture = new TextTexture({
 			fontSize,
-			...options
+			...options,
 		});
 		let material = new SpriteMaterial({
 			depthWrite: false,
