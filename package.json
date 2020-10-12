@@ -1,6 +1,6 @@
 {
 	"name": "@seregpie/three.text-sprite",
-	"version": "3.0.0",
+	"version": "3.0.1",
 	"description": "Optimally displays the text as a sprite.",
 	"keywords": [
 		"sprite",
