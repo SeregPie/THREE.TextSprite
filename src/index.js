@@ -5,8 +5,14 @@ import {
 import TextTexture from '@seregpie/three.text-texture';
 
 let Class = class extends Sprite {
-	constructor(options) {
-		let texture = new TextTexture(options);
+	constructor({
+		fontSize = 1,
+		...options
+	} = {}) {
+		let texture = new TextTexture({
+			fontSize,
+			...options
+		});
 		let material = new SpriteMaterial({
 			depthWrite: false,
 			map: texture,
