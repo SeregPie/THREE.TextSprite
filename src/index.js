@@ -53,6 +53,7 @@ let Class = class extends Sprite {
 
 [
 	'alignment',
+	'backgroundColor',
 	'color',
 	'fontFamily',
 	'fontSize',

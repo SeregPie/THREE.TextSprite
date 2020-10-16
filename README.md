@@ -77,6 +77,7 @@ sprite.text = [
 ```
 new THREE.TextSprite({
   alignment: 'center',
+  backgroundColor: 'rgba(0,0,0,0)',
   color: '#fff',
   fontFamily: 'sans-serif',
   fontSize: 1,
@@ -94,6 +95,7 @@ new THREE.TextSprite({
 | argument | description |
 | ---: | :--- |
 | `alignment` | The horizontal text alignment. Possible values are `'center'`, `'left'` and `'right'`. |
+| `backgroundColor` | The background color. |
 | `color` | The color. |
 | `fontFamily` | The font family. |
 | `fontSize` | The font size. |
@@ -138,6 +140,8 @@ Used to check whether this is an instance of `TextSprite`.
 `.lineGap`
 
 `.padding`
+
+`.backgroundColor`
 
 ### methods
 
