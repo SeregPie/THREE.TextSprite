@@ -39,7 +39,7 @@ The class is globally available as `THREE.TextSprite`.
 ## usage
 
 ```javascript
-let sprite = new THREE.TextSprite({
+let instance = new THREE.TextSprite({
   alignment: 'left',
   color: '#24ff00',
   fontFamily: '"Times New Roman", Times, serif',
@@ -52,7 +52,7 @@ let sprite = new THREE.TextSprite({
     'Like a diamond in the sky.',
   ].join('\n'),
 });
-scene.add(sprite);
+scene.add(instance);
 ```
 
 ---
@@ -60,9 +60,9 @@ scene.add(sprite);
 Update the sprite.
 
 ```javascript
-sprite.fontFamily = 'Arial, Helvetica, sans-serif';
-sprite.fontStyle = 'normal';
-sprite.text = [
+instance.fontFamily = 'Arial, Helvetica, sans-serif';
+instance.fontStyle = 'normal';
+instance.text = [
   'When this blazing sun is gone,',
   'When he nothing shines upon,',
   'Then you show your little light,',
