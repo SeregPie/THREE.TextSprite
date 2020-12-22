@@ -15,7 +15,7 @@ export default {
 		babel({
 			babelHelpers: 'bundled',
 			presets: [['@babel/preset-env', {
-				targets: ['defaults', 'not IE 11'],
+				targets: 'defaults and not IE 11',
 			}]],
 		}),
 		terser(),
